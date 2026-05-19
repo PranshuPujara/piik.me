@@ -470,8 +470,25 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    background: transparent;
+    color: #ffffff;
     border: 1px solid transparent;
     border-radius: 0.75rem;
+}
+
+.landing-nav-toggle:hover,
+.landing-nav-toggle:focus,
+.landing-nav-toggle:active,
+.landing-mobile-close:hover,
+.landing-mobile-close:focus,
+.landing-mobile-close:active {
+    background: transparent;
+    color: #ffffff;
+}
+
+.landing-nav-toggle i,
+.landing-mobile-close i {
+    color: inherit;
 }
 
 .landing-mobile-menu {
