@@ -12,7 +12,6 @@ const splitTestService = require('./src/services/splitTest.service');
 require('dotenv').config();
 
 const { securityHeaders, apiLimiter } = require("./src/middleware/security.middleware");
-
 // Initialize Firebase Admin
 let db = null;
 let auth = null;
@@ -33,7 +32,6 @@ try {
 } catch (error) {
   console.log('⚠️ Firebase Admin not configured. Using in-memory storage.');
   console.log('   See FIREBASE_SETUP.md for setup instructions.');
-  // db and auth remain null - app will use in-memory fallback
 }
 
 const app = express();
@@ -1222,16 +1220,16 @@ async function trackClickAndEmit(shortCode, req, variantLabel = null) {
           [`countries.${locationData.country}`]: admin.firestore.FieldValue.increment(1),
           [`locations.${locationKey}`]: admin.firestore.FieldValue.increment(1)
         };
-        
+
         if (utmSource) {
           updateData.shares = admin.firestore.FieldValue.increment(1);
         }
-        
+
         if (variantLabel) {
           const safeLabel = String(variantLabel).replace(/[.[\]]/g, '_');
           updateData[`variantClicks.${safeLabel}`] = admin.firestore.FieldValue.increment(1);
         }
-        
+
         await analyticsRef.update(updateData);
         
         const updated = await analyticsRef.get();
