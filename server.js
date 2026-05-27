@@ -7,7 +7,13 @@ const { nanoid } = require('nanoid');
 const admin = require('firebase-admin');
 const redisUtils = require('./src/utils/redis.utils');
 require('dotenv').config();
-const fetch = require('node-fetch');
+const fetch = (...args) => {
+  if (typeof globalThis.fetch === 'function') {
+    return globalThis.fetch(...args);
+  }
+
+  return import('node-fetch').then(({ default: fetchFn }) => fetchFn(...args));
+};
 // Initialize Firebase Admin
 // Initialize Firebase Admin
 let db = null;
