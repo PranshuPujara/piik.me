@@ -1254,9 +1254,13 @@ function displayLinks(links, filter) {
             <div class="link-content">
                 <div class="link-url">
                     <a href="${link.shortUrl}" class="link-short" target="_blank">${link.shortUrl.replace('https://', '').replace('http://', '')}</a>
-                    <button class="btn-icon" onclick="copyLink('${link.shortUrl}')" title="Copy">
-                        <i class="fas fa-copy"></i>
-                    </button>
+                    <button 
+    class="btn-icon copy-btn"
+    onclick="copyLink('${link.shortUrl}', this)"
+    title="Copy link"
+>
+    <i class="fas fa-copy"></i>
+</button>
                     ${isInactive ? `<span class="inactive-badge">Inactive</span>` : ''}
                 </div>
                 <div class="link-destination">${link.originalUrl}</div>

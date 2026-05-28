@@ -4297,3 +4297,14 @@ html[data-theme="dark"] .analytics-card #globeViz {
         flex-wrap: wrap;
     }
 }
+
+/* Copy Button */
+.copy-btn {
+    transition: all 0.25s ease;
+}
+
+.copy-btn.copied {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+    transform: scale(1.05);
+}
