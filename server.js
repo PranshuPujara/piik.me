@@ -8,7 +8,7 @@ const admin = require('firebase-admin');
 const fetch = require('node-fetch');
 const redisUtils = require('./src/utils/redis.utils');
 const redirectCache = require('./src/utils/redirect-cache.utils');
-const { securityHeaders, apiLimiter } = require('./src/middleware/security.middleware');
+const { securityHeaders, apiLimiter, bugReportLimiter } = require('./src/middleware/security.middleware');
 require('dotenv').config();
 const fetch = (...args) => {
   if (typeof globalThis.fetch === 'function') {
@@ -962,8 +962,8 @@ app.post('/api/track/share/:shortCode', async (req, res) => {
   res.json({ success: true, message: 'Shares tracked via UTM parameters' });
 });
 
-// Create GitHub Issue for Bug Report
-app.post('/api/bug-report', async (req, res) => {
+// Create GitHub Issue for Bug Report (requires authentication + strict rate limit)
+app.post('/api/bug-report', verifyToken, bugReportLimiter, async (req, res) => {
   try {
     const { title, description, steps, email, userId, userEmail } = req.body;
     
