@@ -54,11 +54,15 @@ firebaseState.reason = 'Firebase connected successfully';
 const app = express();
 const isServerless = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
 const server = isServerless ? null : http.createServer(app);
+// Restrict Socket.IO CORS to the configured application origin.
+// Falls back to the same ALLOWED_ORIGIN used for the Express CORS middleware
+// so both share a single configuration point in the environment.
+const allowedOrigin = process.env.ALLOWED_ORIGIN || false;
 const io = isServerless
   ? { emit: () => {} }
   : socketIo(server, {
       cors: {
-        origin: "*",
+        origin: allowedOrigin,
         methods: ["GET", "POST"]
       }
     });
@@ -78,7 +82,15 @@ function fromFirestoreId(firestoreId) {
 // Middleware
 app.use(securityHeaders);
 app.use(apiLimiter);
-app.use(cors());
+// Restrict CORS to the configured application origin.
+// Without an origin restriction, any third-party website can make credentialed
+// cross-origin requests to the API. Set ALLOWED_ORIGIN in the environment to
+// the production front-end URL (e.g. https://piik.me). When unset, cross-origin
+// requests are blocked entirely (origin: false) rather than allowed for all.
+app.use(cors({
+  origin: process.env.ALLOWED_ORIGIN || false,
+  credentials: true,
+}));
 app.use(express.json());
 app.use(express.static('public', { index: false }));
 app.use((req, res, next) => {
