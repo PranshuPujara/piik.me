@@ -1122,12 +1122,28 @@ html.light-theme .theme-toggle-btn:hover {
 /* Base Overrides */
 html.light-theme .bg-black { background-color: #ffffff; }
 html.light-theme .text-white { color: #111827; }
-html.light-theme .text-black { color: #ffffff; }
+html.light-theme .text-black { color: #111827; }
 html.light-theme .bg-white\/5 { background-color: rgba(0, 0, 0, 0.03); }
 html.light-theme .bg-white\/10 { background-color: rgba(0, 0, 0, 0.06); }
 html.light-theme .bg-black\/20 { background-color: rgba(255, 255, 255, 0.8); }
 html.light-theme .bg-black\/40 { background-color: rgba(243, 244, 246, 0.8); }
 html.light-theme .bg-black\/90, html.light-theme .bg-black\/95 { background-color: rgba(255, 255, 255, 0.95); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+
+html.light-theme .pricing-card {
+    background-color: rgba(255, 255, 255, 0.96);
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
+}
+html.light-theme .pricing-card .text-gray-400,
+html.light-theme .pricing-card .text-gray-300 {
+    color: #4b5563;
+}
+html.light-theme .pricing-card.group-hover\:border-white\/20 {
+    border-color: rgba(0, 0, 0, 0.15);
+}
+html.light-theme .group:hover .group-hover\:shadow-\[0_20px_60px_rgba\(255\,255\,255\,0\.08\)\] {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+}
 
 /* Text Overrides */
 html.light-theme .text-gray-200 { color: #1f2937; }
