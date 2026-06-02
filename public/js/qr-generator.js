@@ -5,6 +5,7 @@ const QRGenerator = {
     currentColor: '#000000',
     currentBgColor: '#ffffff',
     currentFormat: 'png',
+    currentSize: 400,
     currentLink: '',
     currentBrandName: '',
     qrCodeStyling: null,
@@ -215,6 +216,8 @@ const QRGenerator = {
     },
 
     cacheDom() {
+    this.qrSizeSlider = document.getElementById('qrSizeSlider') || null;
+    this.qrSizeValue = document.getElementById('qrSizeValue') || null;
         this.qrLinkInput = document.getElementById('qrLinkInput');
         this.generateBtn = document.getElementById('generateQRBtn');
         this.qrPlaceholder = document.getElementById('qrPlaceholder');
@@ -240,6 +243,17 @@ const QRGenerator = {
         this.qrLinkInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') this.generateQR();
         });
+        this.qrSizeSlider?.addEventListener('input', (e) => {
+            this.currentSize = parseInt(e.target.value);
+
+            if (this.qrSizeValue) {
+                this.qrSizeValue.textContent = `${this.currentSize}px`;
+    }
+
+    if (this.currentLink) {
+        this.generateQR();
+    }
+});
 
         // Brand name overlay
         this.qrBrandInput.addEventListener('input', (e) => {
@@ -344,7 +358,9 @@ const QRGenerator = {
         }
 
         this.currentLink = link;
-        this.qrPlaceholder.style.display = 'none';
+        if (this.qrPlaceholder) {
+    this.qrPlaceholder.style.display = 'none';
+}
 
         try {
             // Check if QRCodeStyling library is loaded
@@ -359,8 +375,8 @@ const QRGenerator = {
             // Set container background
             const bgColor = this.transparentBg?.checked ? '#ffffffda' : this.currentBgColor;
             container.style.backgroundColor = bgColor;
-            container.style.width = '400px';
-            container.style.height = '400px';
+           container.style.width = `${this.currentSize}px`;
+           container.style.height = `${this.currentSize}px`;
             container.style.display = 'inline-block';
             container.style.borderRadius = '24px';
             container.style.overflow = 'hidden';
@@ -373,8 +389,8 @@ const QRGenerator = {
 
             // Build QR code configuration
             const qrOptions = {
-                width: 400,
-                height: 400,
+                width: this.currentSize,
+                height: this.currentSize,
                 type: 'svg',
                 data: link,
                 margin: frameOptions.margin,
@@ -423,8 +439,8 @@ const QRGenerator = {
                 svg.style.borderRadius = '24px'; // Match container border-radius
                 svg.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3)';
                 svg.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
-                svg.style.width = '400px';
-                svg.style.height = '400px';
+                svg.style.width = `${this.currentSize}px`;
+                svg.style.height = `${this.currentSize}px`;
                 // Let the QR library handle the background color
             }
 
@@ -441,8 +457,10 @@ const QRGenerator = {
         } catch (error) {
             console.error('QR generation error:', error);
             this.showNotification(error.message || 'Failed to generate QR code', 'error');
-            this.qrPlaceholder.style.display = 'block';
-            this.qrPlaceholder.textContent = 'Failed to generate QR code. Please try again.';
+            if (this.qrPlaceholder) {
+    this.qrPlaceholder.style.display = 'block';
+    this.qrPlaceholder.textContent = 'Failed to generate QR code. Please try again.';
+}
         }
     },
 
@@ -597,7 +615,7 @@ const QRGenerator = {
         });
     },
 
-    applyFrameToSVG(container, frameOptions, size = 400) {
+    applyFrameToSVG(container, frameOptions, size = this.currentSize) {
         if (!frameOptions.color) return;
 
         const svg = container.querySelector('svg');
@@ -714,8 +732,10 @@ const QRGenerator = {
             }
 
             // Create download QR with proper settings
-            const qrSize = 400;
-            const canvasSize = extension === 'svg' ? 400 : 800;
+           const qrSize = this.currentSize;
+            const canvasSize = extension === 'svg'
+            ? this.currentSize
+            : this.currentSize * 2;
             const scale = canvasSize / 400;
             const downloadOptions = {
                 width: qrSize,

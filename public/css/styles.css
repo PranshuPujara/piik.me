@@ -3240,6 +3240,22 @@ textarea.form-input {
     box-shadow: var(--card-shadow);
 }
 
+.size-slider-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+#qrSizeSlider {
+    flex: 1;
+}
+
+#qrSizeValue {
+    min-width: 70px;
+    font-weight: 600;
+}
+
 .qr-card:hover {
     border-color: rgba(6, 182, 212, 0.3);
     transform: translateY(-3px);
