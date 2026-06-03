@@ -2501,7 +2501,6 @@ async function loadAnalyticsData(linkFilter) {
                     });
                 }
             }
-        }
         
         // Sort click history by timestamp
         allClickHistory.sort((a, b) => {
