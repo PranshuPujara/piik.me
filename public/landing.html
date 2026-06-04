@@ -8,8 +8,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Link to our new raw Vanilla CSS file -->
-    <link rel="stylesheet" href="css/landing.css">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="CSS/landing.css">
+
+    <!-- Dynamic Favicon for /user page -->
+    <script src="js/user-favicon.js" defer></script>
+    
+    <!-- Theme Check (Before Body) -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+            if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+                document.documentElement.classList.add('light-theme');
+            }
+        })();
+    </script>
 </head>
 
 <body class="antialiased overflow-x-hidden selection:bg-accent selection:text-white bg-gray-50 text-gray-900 dark:bg-backgroundDark dark:text-white transition-colors duration-300">
