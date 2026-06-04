@@ -5,7 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>piik.me - Link Management & Analytics</title>
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
-    
+    <meta name="description" content="piik.me - Intelligent link management platform with real-time analytics, custom domains, QR code generation, and bio link pages.">
+    <meta name="keywords" content="link shortener, link management, URL shortener, analytics, QR code, bio link, piik.me">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://piik.me/">
+    <meta property="og:title" content="piik.me - Link Management & Analytics">
+    <meta property="og:description" content="Intelligent link management platform with real-time analytics, custom domains, QR code generation, and bio link pages.">
+    <meta property="og:image" content="assets/images/favicon.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://piik.me/">
+    <meta property="twitter:title" content="piik.me - Link Management & Analytics">
+    <meta property="twitter:description" content="Intelligent link management platform with real-time analytics, custom domains, QR code generation, and bio link pages.">
+    <meta property="twitter:image" content="assets/images/favicon.png">
+
     <!-- Preconnect critical third-party origins -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
     <link rel="preconnect" href="https://www.gstatic.com" crossorigin />
@@ -1179,23 +1195,59 @@
                         </div>
                     </div>
                 </div>
+ <<div class="form-section">
+    <h4>Link Organization</h4>
 
-                <div class="form-section">
-                    <h4>Link Expiry (Optional)</h4>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Expire After Date</label>
-                            <input type="datetime-local" class="form-input" id="expiresAt">
-                            <small style="color: var(--text-tertiary); font-size: 12px;">Link auto-deactivates after this date</small>
-                        </div>
-                        <div class="form-group">
-                            <label>Max Clicks</label>
-                            <input type="number" class="form-input" id="maxClicks" min="1" placeholder="e.g. 100">
-                            <small style="color: var(--text-tertiary); font-size: 12px;">Link auto-deactivates after N clicks</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="form-group">
+        <label>Notes</label>
+        <textarea
+            class="form-input"
+            id="linkNotes"
+            rows="3"
+            placeholder="Add private notes about this link..."
+        ></textarea>
+    </div>
+
+    <div class="form-group">
+        <label>Tags</label>
+        <input
+            type="text"
+            class="form-input"
+            id="linkTags"
+            placeholder="marketing, instagram, campaign"
+        >
+        <small style="color: var(--text-tertiary); font-size: 12px;">
+            Separate tags using commas.
+        </small>
+    </div>
+</div>
+
+<div class="form-section">
+    <h4>Link Expiry (Optional)</h4>
+    <div class="form-grid">
+        <div class="form-group">
+            <label>Expire After Date</label>
+            <input type="datetime-local" class="form-input" id="expiresAt">
+            <small style="color: var(--text-tertiary); font-size: 12px;">
+                Link auto-deactivates after this date
+            </small>
+        </div>
+
+        <div class="form-group">
+            <label>Max Clicks</label>
+            <input
+                type="number"
+                class="form-input"
+                id="maxClicks"
+                min="1"
+                placeholder="e.g. 100"
+            >
+            <small style="color: var(--text-tertiary); font-size: 12px;">
+                Link auto-deactivates after N clicks
+            </small>
+        </div>
+    </div>
+</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" id="modalCancel">Cancel</button>
                 <button class="btn btn-primary" id="createLinkSubmit">
